@@ -16,9 +16,9 @@ export default {
   data: () => ({
     pacients: [],
   }),
-  mounted: {
+  // mounted: {
     // Firebase.firestore().collection("pacients")
-  },
+  // },
 
   methods: {
     goToPacients() {

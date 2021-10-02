@@ -1,8 +1,14 @@
 <template>
   <div>
     <ul>
-      <li></li>
-
+      <li>
+        paciente ejemplo
+        <button @click="deleteUser">Eliminar</button>
+      </li>
+      <li>
+        paciente ejemplo
+        <button @click="deleteUser">Eliminar</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -11,6 +17,11 @@
 export default {
   name: "PacientList",
   props: {},
+  methods: {
+    deleteUser() {
+      console.log("eliminar usuario");
+    },
+  },
 };
 </script>
 

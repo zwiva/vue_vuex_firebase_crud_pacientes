@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="" action="">
+    <form @submit.prevent="changeForm" action="">
       <div>
         <label for="">Nombre</label>
         <input type="text" v-model="pacient.name" />
@@ -17,6 +17,11 @@
         <label for="">Prevision</label>
         <input type="text" v-model="pacient.prevision" />
       </div>
+      <div>
+        <!-- mostrar en base a v-if -->
+        <button @click="createPacient">Crear usuario</button>
+        <button @click="editPacient">Editar usuario</button>
+      </div>
     </form>
   </div>
 </template>
@@ -32,6 +37,17 @@ export default {
       prevision: null,
     },
   }),
+  methods: {
+    changeForm() {
+      console.log("usando formulario");
+    },
+    createPacient() {
+      console.log("creando paciente");
+    },
+    editPacient() {
+      console.log("editando paciente");
+    },
+  },
 };
 </script>
 
