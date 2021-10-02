@@ -1,18 +1,29 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div>
+      <h1>Esta es la vista HOME</h1>
+      <button @click="goToPacients">Ver todos los pacientes</button>
+
+      <pre></pre>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+// import Firebase from "firebase";
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+  data: () => ({
+    pacients: [],
+  }),
+  mounted: {
+    // Firebase.firestore().collection("pacients")
+  },
+
+  methods: {
+    goToPacients() {
+      this.$router.push("/pacients");
+    },
   },
 };
 </script>
