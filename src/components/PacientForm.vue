@@ -11,7 +11,7 @@
       </div>
       <div>
         <label for="">Edad</label>
-        <input type="text" v-model="pacient.age" />
+        <input type="number" v-model="pacient.age" />
       </div>
       <div>
         <label for="">Prevision</label>
@@ -50,6 +50,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

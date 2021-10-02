@@ -13,13 +13,6 @@
 // import Firebase from "firebase";
 export default {
   name: "Home",
-  data: () => ({
-    pacients: [],
-  }),
-  // mounted: {
-    // Firebase.firestore().collection("pacients")
-  // },
-
   methods: {
     goToPacients() {
       this.$router.push("/pacients");

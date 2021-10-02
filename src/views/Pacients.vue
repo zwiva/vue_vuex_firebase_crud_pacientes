@@ -1,13 +1,10 @@
 <template>
   <div>
     <h1>Vista pacientes</h1>
-    <h3>
-      Todos los pacientes
-    </h3>
+    <h3>Todos los pacientes</h3>
     <pacients-list />
     <h3>Agregar o editar paciente</h3>
     <pacient-form />
-
   </div>
 </template>
 
@@ -16,13 +13,16 @@ import PacientsList from "../components/PacientsList.vue";
 import PacientForm from "../components/PacientForm.vue";
 
 export default {
-  name: "AllPacients",
+  name: "Pacients",
   components: {
     PacientsList,
-    PacientForm
+    PacientForm,
   },
+  data: () => ({
+    pacients: [],
+  }),
+  // mounted: {
+  // Firebase.firestore().collection("pacients")
+  // },
 };
 </script>
-
-<style>
-</style>

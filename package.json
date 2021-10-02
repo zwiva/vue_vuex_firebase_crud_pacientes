@@ -5,11 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "predeploy": "npm run build",
+    "deploy": "npx firebase deploy --only hosting --project vuexcrudzwiva"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "firebase": "^8.10.0",
+    "firebase-tools": "^9.19.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
