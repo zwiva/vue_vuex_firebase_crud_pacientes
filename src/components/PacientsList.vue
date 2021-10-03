@@ -1,12 +1,11 @@
 <template>
   <div>
     <ul>
-      <li>
-        paciente ejemplo
-        <button @click="deleteUser">Eliminar</button>
-      </li>
-      <li>
-        paciente ejemplo
+      <li v-for="pacient of pacients" :key="pacient.id">
+        {{ pacient.name }} | 
+        {{ pacient.lastname }} | 
+        {{ pacient.prevision }} |
+        {{ pacient.age }}
         <button @click="deleteUser">Eliminar</button>
       </li>
     </ul>
@@ -16,7 +15,9 @@
 <script>
 export default {
   name: "PacientList",
-  props: {},
+  props: {
+    pacients: { type: Array, require: true },
+  },
   methods: {
     deleteUser() {
       console.log("eliminar usuario");
