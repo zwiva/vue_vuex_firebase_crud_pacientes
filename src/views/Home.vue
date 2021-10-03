@@ -2,7 +2,7 @@
   <div class="home">
     <div>
       <h1>Esta es la vista HOME</h1>
-      <button @click="goToPacients">Ver todos los pacientes</button>
+      <button @click="goToPatients">Ver todos los pacientes</button>
 
       <pre></pre>
     </div>
@@ -14,7 +14,7 @@
 export default {
   name: "Home",
   methods: {
-    goToPacients() {
+    goToPatients() {
       this.$router.push("/pacients");
     },
   },
