@@ -15,7 +15,7 @@ export default {
   name: "Home",
   methods: {
     goToPatients() {
-      this.$router.push("/pacients");
+      this.$router.push("/patients");
     },
   },
 };

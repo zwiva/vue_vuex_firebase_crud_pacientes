@@ -8,7 +8,11 @@ export default new Vuex.Store({
   state: {
     patients: [],
   },
-  getters: {},
+  // getters: {
+  //   getPatient(state) {
+  //     console.log("state by getters", state);
+  //   },
+  // },
   mutations: {
     // ver
     SET_PATIENTS(state, newpatients) {
@@ -21,14 +25,18 @@ export default new Vuex.Store({
     },
     // eliminar
     DELETE_PATIENT(state, patientid) {
-      console.log("inside mutation -> patient.id", patientid);
+      // console.log("inside mutation -> patient.id", patientid);
       const patientToRemove = state.patients.filter(
         (patient) => patient.id === patientid
       );
       const indexOfPatient = state.patients.indexOf(patientToRemove[0]);
-      console.log("index", indexOfPatient);
+      // console.log("index", indexOfPatient);
       state.patients.splice(indexOfPatient, 1);
     },
+    //editar
+    // EDIT_PATIENT() {
+    //   console.log("-> paciente editado satisfactoriamente");
+    // },
   },
   actions: {
     //ver todos los pacientes:
@@ -72,19 +80,15 @@ export default new Vuex.Store({
       context.commit("DELETE_PATIENT", patient.id);
     },
     // editar paciente
-    // editPatient(context, patient) {
-    //   Firebase.firestore()
-    //     .collection("pacients")
-    //     // .get()
-    //     .then((collection) => {
-    //       const patients = [];
-    //       collection.forEach((document) => {
-    //         patients.push({ id: document.id, ...document.data() });
-    //       });
-    //       console.log("se ejecuta edit");
-    //       context.commit("EDIT_PATIENT", patient);
-    //     });
-    // },
+    editPatient(context, patient) {
+      // console.log("editando aaa!!!", patient);
+      Firebase.firestore()
+        .collection("pacients")
+        .doc(patient.id)
+        .update(patient);
+      // console.log("se ejecuta edit");
+      // context.commit("EDIT_PATIENT", patient);
+    },
   },
   modules: {},
 });
