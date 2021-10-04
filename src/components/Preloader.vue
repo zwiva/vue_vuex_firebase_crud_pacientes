@@ -2,7 +2,6 @@
 <transition name="fade">
   <div class="preloader">
     <div class="logo"></div>
-    <p>algun texto</p>
   </div>
 </transition>
   
