@@ -4,21 +4,21 @@
     <div>
       <h3>Todos los patientes</h3>
       <div>
-        <patients-list :patients="patients" />
+        <patients-list :patients="patients" typeForm="" />
         <button @click="$store.dispatch('getAllPatients')">
           Actualizar lista pacientes
         </button>
       </div>
     </div>
-    
+
     <div>
       <h3>Escoja una opcion:</h3>
-      <button @click="showFormCreate()">Crear paciente</button>
-      <button @click="showFormEdit()">Editar paciente</button>
+      <button @click="showFormCreate">Crear paciente</button>
+      <button @click="showFormEdit">Editar paciente</button>
 
       <div v-if="formCreate">
         <h3>Agregar nuevo paciente</h3>
-        <patient-form />
+        <patient-form  />
       </div>
 
       <div v-if="formEdit">
@@ -43,6 +43,7 @@ export default {
     patients: [],
     formCreate: false,
     formEdit: false,
+    typeForm: "",
   }),
   methods: {
     showFormCreate() {
@@ -50,10 +51,11 @@ export default {
     },
     showFormEdit() {
       this.formEdit = !this.formEdit;
+
     },
   },
   mounted() {
-    console.log("pacient");
+    // console.log("mounted patient");
     this.$store.dispatch("getAllPatients");
   },
 };

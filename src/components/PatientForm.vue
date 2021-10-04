@@ -38,11 +38,8 @@ export default {
   methods: {
     sendForm() {
       console.log("creando paciente");
-      this.$store.dispatch("createNewPacient", this.patient);
+      this.$store.dispatch("createNewPatient", this.patient);
       this.patient = {};
-    },
-    editPatient() {
-      console.log("editando patiente");
     },
   },
 };

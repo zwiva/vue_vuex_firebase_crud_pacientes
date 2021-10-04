@@ -4,7 +4,8 @@
       <li v-for="patient of $store.state.patients" :key="patient.id">
         {{ patient.name }} | {{ patient.lastname }} | {{ patient.prevision }} |
         {{ patient.age }}
-        <button @click="deleteUser">Eliminar</button>
+        <button @click="editUser(patient)">Editar</button>
+        <button @click="deleteUser(patient)">Eliminar</button>
       </li>
     </ul>
   </div>
@@ -17,33 +18,18 @@ export default {
     patients: { type: Array, require: true },
   },
   methods: {
-    deleteUser() {
-      console.log("eliminar usuario");
+    deleteUser(patient) {
+      console.log("eliminar usuario by: ", patient.id);
+      this.$store.dispatch("deletePatient", patient);
+    },
+    editUser(patient) {
+      console.log("editar usuario by: ", patient);
+      // this.$store.dispatch("getAllPatients");
     },
   },
 
   mounted() {
-    // Firebase.firestore()
-    //   .collection("patients")
-    //   .get()
-    //   .then((collection) => {
-    //     collection.forEach((document) => {
-    //       this.patients.push({ id: document.id, ...document.data() }); // nuevo objeto con id
-    //     });
-    //   });
-    // this.$store.dispatch("getAllPatients");
-    // console.log("mounted in patientslist 2", patients);
-
-    // Firebase.firestore()
-    //   .collection("patients")
-    //   .onSnapshot((querySnapshot) => {
-    //     this.patients = [];
-    //     querySnapshot.forEach((document) => {
-    //       this.patients.push({ id: document.id, ...document.data() });
-    //     });
-    //   });
-
-    console.log("pacient list");
+    // console.log("mounted patient list");
   },
 };
 </script>
