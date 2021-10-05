@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="sendForm">
+    <Preloader v-if="isLoaderActive" />
     <div>
       <label for="">Nombre </label>
       <input v-if="formCreate" type="text" v-model="patient.name" />
@@ -22,14 +23,14 @@
     </div>
     <div>
       <button v-if="formCreate" type="submit">{{ titleButton }}</button>
-      <button v-else type="submit" >
-        Guardar edición
-      </button>
+      <button v-else type="submit">Guardar edición</button>
     </div>
   </form>
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+
 export default {
   name: "",
   data: () => ({
@@ -40,22 +41,30 @@ export default {
       prevision: null,
     },
     titleButton: "crear",
+    isLoaderActive: false,
   }),
   props: {
     patientToEdit: { type: Object, require: true },
     formCreate: { type: Boolean, require: true },
   },
+  components: { Preloader },
   methods: {
     sendForm() {
       if (this.formCreate) {
         // console.log("creando paciente");
+        this.isLoaderActive = true;
         this.$store.dispatch("createNewPatient", this.patient);
         this.patient = {};
+        setTimeout(() => {
+          this.isLoaderActive = false;
+        }, 1000);
       } else {
         // console.log("editando paciente", this.patientToEdit);
+        this.isLoaderActive = true;
         this.$store.dispatch("editPatient", this.patientToEdit);
-        
-
+        setTimeout(() => {
+          this.isLoaderActive = false;
+        }, 1000);
       }
     },
   },

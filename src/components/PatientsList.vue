@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Preloader v-if="isLoaderActive" />
     <ul>
       <li v-for="patient of $store.state.patients" :key="patient.id">
         {{ patient.name }} | {{ patient.lastname }} | {{ patient.prevision }} |
@@ -12,15 +13,25 @@
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+
 export default {
   name: "PatientList",
+  data: () => ({
+    isLoaderActive: false,
+  }),
   props: {
     patients: { type: Array, require: true },
   },
+  components: { Preloader },
   methods: {
     deleteUser(patient) {
+      this.isLoaderActive = true;
       // console.log("eliminar usuario by: ", patient.id);
       this.$store.dispatch("deletePatient", patient);
+      setTimeout(() => {
+        this.isLoaderActive = false;
+      }, 1000);
     },
   },
 

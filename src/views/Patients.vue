@@ -1,13 +1,11 @@
 <template>
   <div>
-    <!-- <preloader /> -->
+    <Preloader v-if="isLoaderActive" />
     <h1>Vista patientes</h1>
     <div>
       <h3>
         Todos los pacientes
-        <button @click="$store.dispatch('getAllPatients')">
-          Actualizar lista pacientes
-        </button>
+        <button @click="refreshList">Actualizar lista pacientes</button>
       </h3>
       <div>
         <patients-list :patients="patients" @editPatient="editPatient" />
@@ -42,14 +40,14 @@
 <script>
 import PatientsList from "../components/PatientsList.vue";
 import PatientForm from "../components/PatientForm.vue";
-// import Preloader from "../components/Preloader.vue";
+import Preloader from "../components/Preloader.vue";
 
 export default {
   name: "Patients",
   components: {
     PatientsList,
     PatientForm,
-    // Preloader,
+    Preloader,
   },
   data: () => ({
     patients: [],
@@ -58,33 +56,57 @@ export default {
     formCreate: false,
     formEdit: false,
     patientToEdit: {},
+    isLoaderActive: false,
   }),
   methods: {
     showFormCreate() {
+      this.isLoaderActive = true;
       this.formCreate = !this.formCreate;
       this.formCreate
         ? (this.titleCreation = "Ocultar")
         : (this.titleCreation = "Mostrar");
+      setTimeout(() => {
+        this.isLoaderActive = false;
+      }, 1000);
     },
     showFormEdit() {
+      this.isLoaderActive = true;
       this.formEdit = !this.formEdit;
       this.formEdit
         ? (this.titleEdition = "Ocultar")
         : (this.titleEdition = "Mostrar");
+      setTimeout(() => {
+        this.isLoaderActive = false;
+      }, 1000);
     },
     editPatient(patient) {
-      console.log("patient to edit", patient);
+      this.isLoaderActive = true;
+      // console.log("patient to edit", patient);
       this.formEdit = !this.formEdit;
       this.patientToEdit = patient;
       this.$store.dispatch("editPatient", patient);
       this.formEdit
         ? (this.titleEdition = "Ocultar")
         : (this.titleEdition = "Mostrar");
+      setTimeout(() => {
+        this.isLoaderActive = false;
+      }, 1000);
+    },
+    refreshList() {
+      this.isLoaderActive = true;
+      this.$store.dispatch("getAllPatients");
+      setTimeout(() => {
+        this.isLoaderActive = false;
+      }, 1000);
     },
   },
   mounted() {
     // console.log("mounted patient");
+    this.isLoaderActive = true;
     this.$store.dispatch("getAllPatients");
+    setTimeout(() => {
+      this.isLoaderActive = false;
+    }, 2000);
   },
 };
 </script>

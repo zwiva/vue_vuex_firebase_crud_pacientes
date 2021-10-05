@@ -18,10 +18,12 @@ export default new Vuex.Store({
     SET_PATIENTS(state, newpatients) {
       state.patients = newpatients;
       // console.log("state", state);
+      this.isLoaderActive = false;
     },
     // crear
     CREATE_NEW_PATIENT(state, patient) {
       state.patients.push(patient);
+
     },
     // eliminar
     DELETE_PATIENT(state, patientid) {
@@ -32,6 +34,7 @@ export default new Vuex.Store({
       const indexOfPatient = state.patients.indexOf(patientToRemove[0]);
       // console.log("index", indexOfPatient);
       state.patients.splice(indexOfPatient, 1);
+
     },
     //editar
     // EDIT_PATIENT() {
@@ -41,6 +44,7 @@ export default new Vuex.Store({
   actions: {
     //ver todos los pacientes:
     getAllPatients(context) {
+      this.isLoaderActive = true;
       Firebase.firestore()
         .collection("pacients")
         .get()
@@ -68,19 +72,21 @@ export default new Vuex.Store({
     // crear nuevo paciente
     createNewPatient(context, patient) {
       // console.log("data", patient);
+      
       Firebase.firestore().collection("pacients").add(patient);
-
       context.commit("CREATE_NEW_PATIENT", patient);
     },
 
     // eliminar paciente
     deletePatient(context, patient) {
+      
       Firebase.firestore().collection("pacients").doc(patient.id).delete();
       // console.log("inside actions -> patient.id", patient.id);
       context.commit("DELETE_PATIENT", patient.id);
     },
     // editar paciente
     editPatient(context, patient) {
+
       // console.log("editando aaa!!!", patient);
       Firebase.firestore()
         .collection("pacients")
