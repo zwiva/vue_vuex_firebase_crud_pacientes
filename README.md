@@ -1,5 +1,8 @@
 # vuexcrudbeta
 
+# deployed: https://vuexcrudzwiva.web.app/patients
+(on edition doesn't clear form, but edit successfully)
+
 ## Project setup
 ```
 npm install
